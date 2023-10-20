@@ -20,7 +20,7 @@
           <span class="">账号或密码登录</span>
           <span class="h-[1px] w-16 bg-gray-200"></span>
         </div>
-        <el-form :model="form" class="w-[300px]">
+        <el-form :model="form" :rules="rules" class="w-[300px]">
           <el-form-item label="用户名">
             <el-input v-model="form.username" placeholder="请输入用户名">
               <template #prefix>
@@ -30,7 +30,10 @@
               </template>
             </el-input>
 
-          </el-form-item><el-form-item label="密码">
+          </el-form-item>
+
+          <el-form-item label="密码">
+
             <el-input v-model="form.password" placeholder="请输入密码">
               <template #prefix>
                 <el-icon>
@@ -56,6 +59,15 @@ const form = reactive({
   username: "",
   password: "",
 });
+
+const rules = {
+  username: [
+    { required: true, message: '输入用户名', trigger: 'blur' },
+    { min: 2, max: 8, message: '长度在2~8个字符之间', trigger: 'blur' },
+  ],
+  password: [{ required: true, message: '输入用户名', trigger: 'blur' },
+  { min: 2, max: 8, message: '长度在2~8个字符之间', trigger: 'blur' },]
+}
 
 const onSubmit = () => {
   console.log("submit!");
